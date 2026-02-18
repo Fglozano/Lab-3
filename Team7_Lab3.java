@@ -1,3 +1,37 @@
+/* Fausto Lozano, Marisol Anaya Molina, Victoria Santana 
+[CS 3331] Lab 3: Chess pieces with hierarchy and polymorphism
+
+This program lets the user choose chess pieces and give them a 
+starting position on the chessboard. Then the user enters a target position, 
+and the program checks if each piece can legally move to that position based 
+on its movement rules. It uses inheritance and polymorphism so each piece 
+verifies its own move, and finally it prints whether the move is valid or 
+not for all six pieces.
+
+
+Change log:
+
+02/16/2026:
+Victoria Santana
+- Created chessboard class
+- Created chess piece class
+- Created color and piece type enum classes
+- Implemented pieces movement and logic
+
+02/17/2026:
+Marisol Anaya
+- Created main file, Team7_Lab3.java
+- Implemented user input scanning (piece, color, position)
+
+
+02/18/2026
+Fausto Lozano
+- Handle invalid inputs from user 
+- Moved pieces movement and logic to individual classes
+- Implemented traversing
+- Debug syntax errors
+*/
+
 import java.util.Scanner;
 
 class Team7_Lab3{
