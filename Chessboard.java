@@ -1,4 +1,4 @@
-public class ChessBoard {
+public class Chessboard {
 
     // Define constants that represent the maximum and minimum valid row number on a chessboard
     public static int MAX_ROW = 8;

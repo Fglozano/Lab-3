@@ -1,4 +1,3 @@
-import java.rmi.server.RMISocketFactory;
 import java.util.Scanner;
 
 class Team7_Lab3{
@@ -14,15 +13,15 @@ class Team7_Lab3{
 
         for(int i = 0; i < 6; i++){
             //Ask for piece type
-            ChessPieceType pieceType = null;
+            PieceType pieceType = null;
             while(pieceType == null){
                 System.out.println("Select a chess piece (PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING");
                 String input = scanner.next().toUpperCase();
 
                 try{
-                    pieceType = ChessPieceType.valueOf(input);
+                    pieceType = PieceType.valueOf(input);
                 }catch (IllegalArgumentException e){
-                    System.out.printlm("Invalid chess piece. Try again");
+                    System.out.println("Invalid chess piece. Try again");
                 }
             }
 
@@ -40,18 +39,23 @@ class Team7_Lab3{
             }
 
             //Ask for position and validate 
-            char column;
+            Chessboard.Column column;
             int row;
 
             while(true){
                 System.out.println("Enter a staring column (a-h)");
-                column = scanner.next().toLowerCase().charAt(0);
+                String colInput = scanner.next().toUpperCase();
+                column = Chessboard.Column.valueOf(colInput);
 
                 System.out.println("Enter starting row (1-8)");
                 row = scanner.nextInt();
 
-                if(board.withinChessboard(column, row)) break;
-                System.out.println("Invalid position. Try again");
+                if(board.withinChessboard(column, row)){
+                    break;
+                }
+                else {
+                    System.out.println("Invalid position. Try again");
+                }
             }
 
             //Create piece object
@@ -70,18 +74,45 @@ class Team7_Lab3{
         }
 
         //Ask for target position
-        char targetColumn;
+        Chessboard.Column targetColumn;
         int targetRow;
 
         while(true){
-            System.out.println("Eneter target column (a-h)");
-            targetColumn = scanner.next().toLowerCase().charAt(0);
+            try{
+                System.out.println("Eneter target column (a-h)");
+                String colInput = scanner.next().toLowerCase();
+                targetColumn = Chessboard.Column.valueOf(colInput);
 
-            System.out.println("Enter target row (1-8)");
-            targetRow = scanner.nextInt();
+                System.out.println("Enter target row (1-8)");
+                targetRow = scanner.nextInt();
 
-            if(board.withinChessboard(targetColumn, targetRow)) break;
-            System.out.println("Invalid target position. Try agan");
+                if(board.withinChessboard(targetColumn, targetRow)){
+                    break;
+                }
+                else{
+                    System.out.println("Invalid target position. Try again");
+                }
+            }
+            catch (Exception e){
+                System.out.println("Invalid input. Try again.");
+            }
         }
+
+        for (int i = 0; i < pieces.length; i++) {
+            ChessPiece piece = pieces[i];
+
+            boolean canMove = piece.verifyMove(targetColumn, targetRow);
+
+            if (canMove) {
+                System.out.println(piece.getPieceName() + " at "
+                        + piece.getColumn() + ", " + piece.getRow()
+                        + " can move to " + targetColumn + ", " + targetRow);
+            } else {
+                System.out.println(piece.getPieceName() + " at "
+                        + piece.getColumn() + ", " + piece.getRow()
+                        + " can NOT move to " + targetColumn + ", " + targetRow);
+            }
+        }
+
     }
 }
