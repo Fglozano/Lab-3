@@ -10,6 +10,11 @@ public class Rook extends ChessPiece {
 
     @Override
     public boolean verifyMove(Chessboard.Column newColumn, int newRow) {
+
+        if (newColumn == column && newRow == row) {
+            return false;
+        }
+        
         return newColumn == column || newRow == row;
     }
 }

@@ -14,6 +14,10 @@ public class Bishop extends ChessPiece {
         int colDiff = Math.abs(newColumn.ordinal() - column.ordinal());
         int rowDiff = Math.abs(newRow - row);
 
+        if (newColumn == column && newRow == row) {
+            return false;
+        }
+
         return colDiff == rowDiff;
     }
 }

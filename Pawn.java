@@ -14,6 +14,10 @@ public class Pawn extends ChessPiece {
         int colDiff = Math.abs(newColumn.ordinal() - column.ordinal());
         int rowDiff = newRow - row;
 
+        if (newColumn == column && newRow == row) {
+            return false;
+        }
+
         if (color == Color.WHITE) {
             return colDiff == 0 && rowDiff == 1;
         } else {
